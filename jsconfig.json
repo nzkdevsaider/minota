@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "paths": {
-      "@minota/*": ["./*"]
+      "@minota/*": ["./*"],
+      "@minota/styles/*": ["./styles/*"],
+      "@minota/lib/*": ["./lib/*"],
     }
   }
 }

@@ -44,24 +44,17 @@ export const getCourseItemsById = async (idCourse) => {
 export const getCourseGradesById = async (idItem) => {
   return await database.courseGrades.where({ idItem }).toArray();
 };
-
 /**
- * La función `addCourse` agrega un nuevo curso a una base de datos con el nombre, el color, el
- * profesor, el año y el semestre proporcionados.
- * @param name - El nombre del curso.
- * @param color - El parámetro "color" se utiliza para especificar el color del curso. Podría ser una
- * cadena que represente un valor de color, como "rojo", "azul", "#FF0000", etc.
- * @param teacher - El parámetro "profesor" representa el nombre o identificador del profesor que
- * impartirá el curso.
- * @param year - El parámetro "año" representa el año en que se ofrece el curso. Podría ser un valor
- * numérico que represente el año, como 2022.
- * @param semester - El parámetro "semestre" representa el semestre en el que se ofrece el curso.
- * Podría ser una cadena o un número que indique el semestre específico, como "Otoño de 2021" o "1er
- * semestre".
+ * La función `addCourse` agrega un nuevo curso a una base de datos con un nombre y color determinados.
+ * @param name - El parámetro de nombre es el nombre del curso que desea agregar.
+ * @param color - El parámetro "color" se utiliza para especificar el color del curso. Puede ser
+ * cualquier valor de color válido, como un código de color hexadecimal (#RRGGBB) o un nombre de color
+ * (por ejemplo, "rojo", "azul", "verde").
  * @returns una promesa que resuelve el resultado de agregar un curso a la base de datos.
  */
-export const addCourse = async (name, color, teacher, year, semester) => {
-  if (!name || !color || !teacher || !year || !semester) {
+
+export const addCourse = async (name, color) => {
+  if (!name || !color) {
     throw new Error("Todos los campos son requeridos.");
   }
 
@@ -69,8 +62,16 @@ export const addCourse = async (name, color, teacher, year, semester) => {
     id: v4(),
     name,
     color,
-    teacher,
-    year,
-    semester,
+    createdAt: new Date(),
   });
+};
+
+/**
+ * La función `deleteCourse` elimina un curso de la base de datos utilizando el `id` proporcionado.
+ * @param id - El parámetro `id` es el identificador único del curso que debe eliminarse de la base de
+ * datos.
+ * @returns La función deleteCourse devuelve el resultado de la operación database.courses.delete(id).
+ */
+export const deleteCourse = async (id) => {
+  return await database.courses.delete(id);
 };

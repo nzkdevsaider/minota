@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Cog6ToothIcon,
   EllipsisVerticalIcon,
@@ -6,16 +8,31 @@ import {
   PlusIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
+import { getCourseById } from "@minota/db/api/courses";
+import { useLiveQuery } from "dexie-react-hooks";
+import LoadingScreen from "@minota/components/Loading/LoadingScreen";
 
 const CoursesPage = () => {
+  const pathname = usePathname();
+  const id = pathname.split("/")[2];
+  const course = useLiveQuery(() => getCourseById(id), [id]);
+
+  if (!course) {
+    return <LoadingScreen />;
+  }
+
   return (
     <section className="space-y-8">
       {/* Course Header */}
       <div className="flex flex-col justify-center items-center gap-5">
         <div className="flex flex-row justify-center items-center gap-3">
-          <h1 className="text-4xl font-extrabold text-center">
-            Nombre asignatura
-          </h1>
+          <div className="avatar placeholder">
+            <div className="bg-secondary-focus mask mask-squircle w-10">
+              <span className="text-2xl">{"📓"}</span>
+            </div>
+          </div>
+          <h1 className="text-4xl font-extrabold text-center">{course.name}</h1>
           <button className="btn btn-circle btn-ghost">
             <PencilSquareIcon className="w-5 h-5" />
           </button>

@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <html lang="es" data-theme="minota">
       <body className={inter.className}>
-        <main className="m-10 space-y-10">
+        <main className="m-3 md:m-10 space-y-10">
           <Header />
           {children}
         </main>

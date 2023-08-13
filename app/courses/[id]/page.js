@@ -9,9 +9,10 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
-import { getCourseById } from "@minota/db/api/courses";
+import { getCourseById, getCourseItemsById } from "@minota/db/api/courses";
 import { useLiveQuery } from "dexie-react-hooks";
 import LoadingScreen from "@minota/components/Loading/LoadingScreen";
+import FinalGrade from "@minota/components/Course/FinalGrade";
 
 const CoursesPage = () => {
   const pathname = usePathname();
@@ -29,7 +30,9 @@ const CoursesPage = () => {
         <div className="flex flex-row justify-center items-center gap-3">
           <div className="avatar placeholder">
             <div className="bg-secondary-focus mask mask-squircle w-10">
-              <span className="text-2xl">{"📓"}</span>
+              <span className="text-2xl font-bold">
+                {course.icon ?? course.name[0]}
+              </span>
             </div>
           </div>
           <h1 className="text-4xl font-extrabold text-center">{course.name}</h1>
@@ -37,10 +40,7 @@ const CoursesPage = () => {
             <PencilSquareIcon className="w-5 h-5" />
           </button>
         </div>
-        <div className="flex flex-row items-center justify-center bg-primary rounded-full w-40 h-14 gap-4 shadow-md">
-          <span className="text-sm">Nota final</span>
-          <span className="font-extrabold text-4xl">A</span>
-        </div>
+        <FinalGrade />
       </div>
       {/* Item add */}
       <div className="flex flex-row justify-end items-center gap-5">

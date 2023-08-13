@@ -29,6 +29,7 @@ export const getCourseById = async (id) => {
  * @returns una promesa que se resuelve en una serie de elementos del curso que coinciden con el
  * `idCourse` dado.
  */
+
 export const getCourseItemsById = async (idCourse) => {
   return await database.courseItems.where({ idCourse }).toArray();
 };

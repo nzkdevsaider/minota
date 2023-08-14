@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
       "@minota/*": ["./*"],
       "@minota/styles/*": ["./styles/*"],
       "@minota/lib/*": ["./lib/*"],
+      "@minota/components/*": ["./components/*"],
     }
   }
 }

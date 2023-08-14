@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import CreatorDialog from "./CourseCreatorDialog";
+import CreatorDialog from "../Dialogs/CourseCreatorDialog";
 import FinalGrade from "./FinalGrade";
 
 const BoxCourse = ({ course, courseCreator }) => {

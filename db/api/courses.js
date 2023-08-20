@@ -68,6 +68,29 @@ export const addCourse = async (name, color) => {
 };
 
 /**
+ * La función `addItem` agrega un nuevo elemento a un curso con el ID, el nombre y el porcentaje
+ * especificados.
+ * @param idCourse - El id del curso al que pertenece el elemento.
+ * @param name - El parámetro de nombre es una cadena que representa el nombre del elemento que se
+ * agregará.
+ * @param percentage - El parámetro "porcentaje" representa el valor porcentual asociado con el
+ * elemento que se agrega al curso.
+ * @returns una promesa que resuelve el resultado de agregar un nuevo elemento a la base de datos.
+ */
+export const addItem = async (idCourse, name, percentage) => {
+  if (!name || !percentage || !idCourse) {
+    throw new Error("Todos los campos son requeridos.");
+  }
+
+  return await database.courseItems.add({
+    id: v4(),
+    idCourse,
+    name,
+    percentage,
+  });
+};
+
+/**
  * La función `deleteCourse` elimina un curso de la base de datos utilizando el `id` proporcionado.
  * @param id - El parámetro `id` es el identificador único del curso que debe eliminarse de la base de
  * datos.

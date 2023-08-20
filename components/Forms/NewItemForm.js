@@ -1,8 +1,13 @@
 import { Formik } from "formik";
 import { validator } from "@minota/lib/validators/newItemSchema";
 import ErrorForm from "../ErrorMessages/ErrorForm";
+import { addItem } from "@minota/db/api/courses";
+import { CourseContext } from "@minota/context/CourseContext";
+import { useContext } from "react";
 
 const NewItemForm = () => {
+  const { courseId } = useContext(CourseContext);
+
   return (
     <Formik
       initialValues={{
@@ -12,8 +17,8 @@ const NewItemForm = () => {
       validationSchema={validator}
       onSubmit={(values) => {
         try {
-          window.createCourse.close();
-          // sumbit
+          window.addItem.close();
+          addItem(courseId, values.name, values.percentage);
         } catch (error) {
           console.error(error);
         }
@@ -51,8 +56,8 @@ const NewItemForm = () => {
             <div>
               <label className="label">
                 <span className="label-text">Porcentaje</span>
-                {errors.color && touched.color && (
-                  <ErrorForm>{errors.color}</ErrorForm>
+                {errors.percentage && touched.percentage && (
+                  <ErrorForm>{errors.percentage}</ErrorForm>
                 )}
               </label>
               <div className="flex flex-row items-center">

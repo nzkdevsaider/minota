@@ -4,7 +4,7 @@ import AddItemDialog from "../Dialogs/AddItemDialog";
 const AddItemButton = () => {
   return (
     <>
-      <AddItemDialog />
+      <AddItemDialog/>
       <button
         onClick={() => window.addItem.showModal()}
         className="btn btn-sm btn-primary"

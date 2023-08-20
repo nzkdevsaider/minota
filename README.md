@@ -1,5 +1,9 @@
 # minota - organizador de calificaciones
 
+⚠ **versión ALPHA**
+
+![50shots_so](https://github.com/nzkdevsaider/minota/assets/14142484/ed91e1e5-315d-4160-bb2f-a3e0f5287e0b)
+
 **minota** es una **aplicación web progresiva (PWA)** creado en Next.js y React.js para organizar y dar seguimiento a calificaciones academicas.
 
 

@@ -1,6 +1,8 @@
 import { database } from "../config";
 import { v4 } from "uuid";
 
+// Courses
+
 /**
  * La función `getAllCourses` recupera todos los cursos de una base de datos.
  * @returns La función `getAllCourses` devuelve una promesa que se resuelve en una matriz de todos los
@@ -68,6 +70,33 @@ export const addCourse = async (name, color) => {
 };
 
 /**
+ * La función `deleteCourse` elimina un curso de la base de datos utilizando el `id` proporcionado.
+ * @param id - El parámetro `id` es el identificador único del curso que debe eliminarse de la base de
+ * datos.
+ * @returns La función deleteCourse devuelve el resultado de la operación database.courses.delete(id).
+ */
+export const deleteCourse = async (id) => {
+  return await database.courses.delete(id);
+};
+
+/**
+ * La función actualiza el nombre de un curso en una base de datos.
+ * @param id - El parámetro id es el identificador único del curso que debe actualizarse. Se utiliza
+ * para localizar el curso específico en la base de datos.
+ * @param name - El nombre del curso que desea actualizar.
+ * @returns el resultado de actualizar el nombre del curso en la base de datos.
+ */
+export const updateCourseName = async (id, name) => {
+  if (!name) {
+    throw new Error("El nombre es requerido.");
+  }
+
+  return await database.courses.update(id, { name });
+};
+
+// Items
+
+/**
  * La función `addItem` agrega un nuevo elemento a un curso con el ID, el nombre y el porcentaje
  * especificados.
  * @param idCourse - El id del curso al que pertenece el elemento.
@@ -91,11 +120,33 @@ export const addItem = async (idCourse, name, percentage) => {
 };
 
 /**
- * La función `deleteCourse` elimina un curso de la base de datos utilizando el `id` proporcionado.
- * @param id - El parámetro `id` es el identificador único del curso que debe eliminarse de la base de
- * datos.
- * @returns La función deleteCourse devuelve el resultado de la operación database.courses.delete(id).
+ * La función actualiza el nombre de un elemento en una base de datos del curso.
+ * @param id - El parámetro `id` es el identificador del elemento que debe actualizarse en la base de
+ * datos. Se utiliza para localizar el elemento específico que necesita ser actualizado.
+ * @param name - El parámetro de nombre es el nuevo nombre que desea actualizar para el elemento.
+ * @returns el resultado de actualizar el nombre del elemento en la base de datos.
  */
-export const deleteCourse = async (id) => {
-  return await database.courses.delete(id);
+export const updateItemName = async (id, name) => {
+  if (!name) {
+    throw new Error("El nombre es requerido.");
+  }
+
+  return await database.courseItems.update(id, { name });
 };
+
+/**
+ * La función `updateItemPercentage` actualiza el porcentaje de un elemento del curso en una base de
+ * datos.
+ * @param id - El parámetro id es el identificador del elemento que debe actualizarse. Se utiliza para
+ * localizar el elemento específico en la base de datos.
+ * @param percentage - El parámetro "porcentaje" es el nuevo valor que desea actualizar para el
+ * elemento con el "id" especificado.
+ * @returns el resultado de actualizar el porcentaje del artículo en la base de datos.
+ */
+export const updateItemPercentage = async (id, percentage) => {
+  if (!percentage) {
+    throw new Error("El porcentaje es requerido.");
+  }
+
+  return await database.courseItems.update(id, { percentage });
+}
